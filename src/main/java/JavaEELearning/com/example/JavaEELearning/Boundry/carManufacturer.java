@@ -1,0 +1,31 @@
+package JavaEELearning.com.example.JavaEELearning.Boundry;
+
+import java.util.UUID;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+import JavaEELearning.com.example.JavaEELearning.Control.CarFactory;
+import JavaEELearning.com.example.JavaEELearning.Control.CarRepository;
+import JavaEELearning.com.example.JavaEELearning.Entity.Car;
+import JavaEELearning.com.example.JavaEELearning.Entity.Specification;
+
+@Stateless
+public class carManufacturer {
+
+	
+	@Inject
+	CarFactory carFactory;
+	@Inject
+	CarRepository carRepository;
+	
+	public Car manufatureCar(Specification specification) {
+		Car car = carFactory.createCar(specification);
+		carRepository.store(car);
+		
+		return car;
+
+	}
+	
+	
+}
