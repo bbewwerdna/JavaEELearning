@@ -2,14 +2,23 @@ package JavaEELearning.com.example.JavaEELearning.Control;
 
 import java.util.UUID;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import JavaEELearning.com.example.JavaEELearning.Entity.Car;
+import JavaEELearning.com.example.JavaEELearning.Entity.Color;
 import JavaEELearning.com.example.JavaEELearning.Entity.Specification;
 
 public class CarFactory {
+	
+	@Inject
+	@Diesel
+	Color defaultCarColor;
+	
 	public Car createCar(Specification specification) {
 		Car car = new Car();
 		car.setIdentifier(UUID.randomUUID().toString());
-		car.setColor(specification.getColor());
+		car.setColor(specification.getColor() == null ? defaultCarColor : specification.getColor());
 		car.setEnginetype(specification.getEngineType());
 		return car;
 	}
